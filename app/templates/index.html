@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Hello {{ var }}</h1>
+    <h1>Projekt Software Engineering (ISEF)</h1>
+    <br>
+    <h3>
+        {% for person in member %}
+            <ul>
+                <li>{{ person }}</li>
+            </ul>
+        {% endfor %}
+    </h3>
 {% endblock %}
