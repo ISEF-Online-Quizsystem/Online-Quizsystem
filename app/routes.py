@@ -5,9 +5,9 @@ from app.forms import LoginForm
 
 @app.route('/index')
 @app.route('/')
-def hello_world():
-    member = ['Christine Rasche', 'Rubens Romanello', 'Viet-Hung Dinh', 'Andreas Gropp']
-    return render_template('index.html', member=member)
+def index():
+
+    return render_template('index.html')
 
 
 @app.route('/login')
