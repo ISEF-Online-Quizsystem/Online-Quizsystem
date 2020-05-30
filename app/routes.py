@@ -51,3 +51,11 @@ def register():
         flash('Gratulation, du bist jetzt registriert.')
         return redirect(url_for('login'))
     return render_template('register.html', title='Registrieren', form=form)
+
+
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+
+    return render_template('user.html', user=user)
