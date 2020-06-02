@@ -33,3 +33,8 @@ class EditProfileForm(FlaskForm):
     username = StringField('Benutzername', validators=[DataRequired()])
     about_me = TextAreaField('Über mich', validators=[Length(min=0, max=140)])
     submit = SubmitField('Abschicken')
+
+
+class ResetPasswordRequestForm(FlaskForm):
+    email = StringField('E-Mail', validators=[DataRequired(), Email()])
+    submit = SubmitField('Neues Passwort anfordern.')
