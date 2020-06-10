@@ -111,7 +111,7 @@ def reset_password(token):
     if form.validate_on_submit():
         user.set_password(form.password.data)
         db.session.commit()
-        flash('Dein Passowrt wurde zurückgesetzt.')
+        flash('Dein Passwort wurde zurückgesetzt.')
         return redirect(url_for('login'))
     return render_template('reset_password.html', form=form)
 
