@@ -9,3 +9,6 @@ update
 fix  
 test
 
+## show a branch
+git branch
+
