@@ -116,3 +116,8 @@ def reset_password(token):
     return render_template('reset_password.html', form=form)
 
 
+@app.route('/play', methods=['GET', 'POST'])
+def play():
+    return render_template('play.html')
+
+
