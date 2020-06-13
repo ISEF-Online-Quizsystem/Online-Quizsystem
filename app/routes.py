@@ -121,3 +121,13 @@ def play():
     return render_template('play.html')
 
 
+@app.route('/singleplayer', methods=['GET', 'POST'])
+def singleplayer():
+    return render_template('singleplayer.html')
+
+
+@app.route('/multiplayer', methods=['GET', 'POST'])
+def multiplayer():
+    return render_template('multiplayer.html')
+
+

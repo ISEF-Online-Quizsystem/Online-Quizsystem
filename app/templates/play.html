@@ -2,7 +2,8 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-    <h1>Wähle deinen Spielmodus aus</h1>
-    <button>Einzelspieler</button>
-    <button>Duellmodus</button>
+    <h1 class="text-center">Wähle deinen Spielmodus aus</h1>
+    <a href="{{ url_for('singleplayer') }}" class="btn btn-primary btn-lg">Einzelspieler</a>
+    <a href="{{ url_for('multiplayer') }}" class="btn btn-primary btn-lg" style="float: right">Duellmodus</a>
+
 {% endblock %}
