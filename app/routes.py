@@ -116,18 +116,28 @@ def reset_password(token):
     return render_template('reset_password.html', form=form)
 
 
+
 @app.route('/play', methods=['GET', 'POST'])
+@login_required
 def play():
     return render_template('play.html')
 
 
 @app.route('/singleplayer', methods=['GET', 'POST'])
+@login_required
 def singleplayer():
     return render_template('singleplayer.html')
 
 
 @app.route('/multiplayer', methods=['GET', 'POST'])
+@login_required
 def multiplayer():
     return render_template('multiplayer.html')
+
+
+@app.route('/questions', methods=['GET', 'POST'])
+@login_required
+def questions():
+    return render_template('questions.html')
 
 
