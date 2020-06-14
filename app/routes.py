@@ -141,3 +141,9 @@ def questions():
     return render_template('questions.html')
 
 
+@app.route('/highscore', methods=['GET', 'POST'])
+@login_required
+def highscore():
+    return render_template('highscore.html')
+
+
