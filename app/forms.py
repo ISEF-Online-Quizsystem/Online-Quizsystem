@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, RadioField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length
 from app.models import User
 
@@ -54,3 +54,13 @@ class ResetPasswordForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Passwort wiederholen', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Fordere Passwort-Reset an')
+
+
+class QuestionForm(FlaskForm):
+    question = TextAreaField('Frage', validators=[Length(min=0, max=140)])
+    option_one = RadioField("Antwortoption 1")
+    option_two = RadioField("Antwortoption 2")
+    option_three = RadioField("Antwortoption 3")
+    option_four = RadioField("Antwortoption 4")
+    option_five = RadioField("Antwortoption 5")
+    submit = SubmitField('Frage absenden')

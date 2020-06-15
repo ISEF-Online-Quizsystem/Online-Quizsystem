@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, ResetPasswordRequestForm, ResetPasswordForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, ResetPasswordRequestForm, ResetPasswordForm, QuestionForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
 from werkzeug.urls import url_parse
@@ -138,7 +138,8 @@ def multiplayer():
 @app.route('/questions', methods=['GET', 'POST'])
 @login_required
 def questions():
-    return render_template('questions.html')
+    form = QuestionForm()
+    return render_template('questions.html', form=form)
 
 
 @app.route('/highscore', methods=['GET', 'POST'])
