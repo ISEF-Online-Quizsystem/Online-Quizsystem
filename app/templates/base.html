@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="de">
     <head>
         {% block head %}
         <!-- Required meta tags -->
@@ -42,7 +42,6 @@
                             {% endif %}
                         </ul>
                     </div>
-                </div>
             </nav>
         {% endblock %}
 
@@ -51,7 +50,7 @@
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {% for message in messages %}
-                    <div class=""alert alert-info" role="alert">{{ message }}</div>
+                    <div class="alert alert-info" role="alert">{{ message }}</div>
                     {% endfor %}
                 {% endif %}
                 {% endwith %}
