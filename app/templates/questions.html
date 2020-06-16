@@ -1,24 +1,23 @@
 {% extends "base.html" %}
-{% import 'bootstrap/wtf.html' as wtf %}
+{% import 'bootstrap/form.html' as wtf %}
 
 {% block app_content %}
     <h1 class="text-center">Fragen</h1>
-     <div class="dropdown">
-      <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown">Wähle einen Kurs aus!
-      <span class="caret"></span></button>
-      <ul class="dropdown-menu">
-        <li><a href="#">Grundlagen der industriellen Softwaretechnik (IGIS01)</a></li>
-        <li><a href="#">Mathematik Grundlagen I (IMT101)</a></li>
-        <li><a href="#">Grundlagen der objektorientierten Programmierung mit Java (IOBP01)</a></li>
-        <li><a href="#">Computertraining (BCTR)</a></li>
-        <li><a href="#">Betriebswirtschaftslehre (BBWL-01)</a></li>
-        <li><a href="#">Einführung in das wissenschaftliche Arbeiten (DLBWIR-01)</a></li>
-      </ul>
+    <div class="form-group">
+        <select class="form-control" name="Modulauswahl" style="width: 42%">
+            <option>Wähle einen Kurs aus!</option>
+            <option>Grundlagen der industriellen Softwaretechnik (IGIS01)</option>
+            <option>Mathematik Grundlagen I (IMT101)</option>
+            <option>Grundlagen der objektorientierten Programmierung mit Java (IOBP01)</option>
+            <option>Computertraining (BCTR)</option>
+            <option>Betriebswirtschaftslehre (BBWL-01)</option>
+            <option>Einführung in das wissenschaftliche Arbeiten (DLBWIR-01)</option>
+         </select>
     </div>
     <br>
     <div class="row">
         <div class="col-md-4">
-            {{ wtf.quick_form(form) }}
+            {{ wtf.render_form(form) }}
         </div>
     </div>
 
