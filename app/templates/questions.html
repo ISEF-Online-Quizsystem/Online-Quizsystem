@@ -3,18 +3,16 @@
 
 {% block app_content %}
     <h1 class="text-center">Fragen</h1>
-     <div class="dropdown">
-      <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown">Wähle einen Kurs aus!
-      <span class="caret"></span></button>
-      <ul class="dropdown-menu">
-        <li>Grundlagen der industriellen Softwaretechnik (IGIS01)</li>
-        <li>Mathematik Grundlagen I (IMT101)</li>
-        <li>Grundlagen der objektorientierten Programmierung mit Java (IOBP01)</li>
-        <li>Computertraining (BCTR)</li>
-        <li>Betriebswirtschaftslehre (BBWL-01)</li>
-        <li>Einführung in das wissenschaftliche Arbeiten (DLBWIR-01)</li>
-      </ul>
-    </div>
+
+    <select name="Modulauswahl">
+        <option>Wähle einen Kurs aus!</option>
+        <option>Grundlagen der industriellen Softwaretechnik (IGIS01)</option>
+        <option>Mathematik Grundlagen I (IMT101)</option>
+        <option>Grundlagen der objektorientierten Programmierung mit Java (IOBP01)</option>
+        <option>Computertraining (BCTR)</option>
+        <option>Betriebswirtschaftslehre (BBWL-01)</option>
+        <option>Einführung in das wissenschaftliche Arbeiten (DLBWIR-01)</option>
+     </select>
     <br>
     <div class="row">
         <div class="col-md-4">

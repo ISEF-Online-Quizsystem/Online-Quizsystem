@@ -60,9 +60,9 @@
         {% endblock %}
 
         {% block scripts %}
+            {{ bootstrap.load_js() }}
             {{ moment.include_moment() }}
             {{ moment.locale("de") }}
-            {{ bootstrap.load_js() }}
         {% endblock %}
     </body>
 </html>
