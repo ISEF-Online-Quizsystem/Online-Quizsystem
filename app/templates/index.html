@@ -5,7 +5,11 @@
 {% block app_content %}
     <h1 class="text-center">IUBH-Quiz</h1>
     <h2 class="text-center">Hallo {{ current_user.username }}!</h2>
-    <h2 class="text-center">Fordere deine Kommilitonen heraus!</h2>
+    {% if tutor %}
+        <h2 class="text-center">Du bist ein Tutor.</h2>
+    {% else %}
+        <h2 class="text-center">Fordere deine Kommilitonen heraus!</h2>
+    {% endif %}
     {% if form %}
         <div class="row">
             <div class="col-md-4">

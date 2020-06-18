@@ -19,8 +19,10 @@ def before_request():
 @app.route('/')
 @login_required
 def index():
-
-    return render_template('index.html')
+    tutor = False
+    if current_user.tutor:
+        tutor = True
+    return render_template('index.html', tutor=tutor)
 
 
 @app.route('/login', methods=['GET', 'POST'])
