@@ -51,10 +51,10 @@ class User(UserMixin, db.Model):
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    module = db.Column(db.String(64), index=True)
     question = db.Column(db.String(280))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     answers = db.relationship('Answer', lazy='dynamic')
+    module_id = db.Column(db.Integer, db.ForeignKey('module.id'))
 
     def __repr__(self):
         return f'<Question {self.question}>'
@@ -68,3 +68,9 @@ class Answer(db.Model):
     option_four = db.Column(db.String(64))
     option_five = db.Column(db.String(64))
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
+
+
+class Module(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128), index=True, unique=True)
+    questions = db.relationship('Question', lazy='dynamic')

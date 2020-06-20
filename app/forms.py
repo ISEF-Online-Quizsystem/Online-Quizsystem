@@ -1,11 +1,16 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length, NumberRange
-from app.models import User
+from app.models import User, Module
 
-MODULE_LIST = ['Grundlagen der industriellen Softwaretechnik (IGIS01)', 'Mathematik Grundlagen I (IMT101)',
-               'Grundlagen der objektorientierten Programmierung mit Java (IOBP01)' 'Computertraining (BCTR)',
-               'Betriebswirtschaftslehre (BBWL-01)', 'Einführung in das wissenschaftliche Arbeiten (DLBWIR-01)']
+
+def get_modules():
+    modules = []
+    results = Module.query.filter_by().all()
+    for result in results:
+        modules.append(result.name)
+
+    return modules
 
 
 class LoginForm(FlaskForm):
@@ -61,7 +66,7 @@ class ResetPasswordForm(FlaskForm):
 
 
 class QuestionForm(FlaskForm):
-    modules = SelectField('Wähle einen Kurs aus!', choices=MODULE_LIST)
+    modules = SelectField('Wähle einen Kurs aus!', choices=get_modules())
     question = TextAreaField('Frage', validators=[Length(min=0, max=140)])
     option_one = StringField('Antwortoption 1', validators=[DataRequired()])
     option_two = StringField('Antwortoption 2', validators=[DataRequired()])
@@ -70,3 +75,4 @@ class QuestionForm(FlaskForm):
     option_five = StringField('Antwortoption 5', validators=[DataRequired()])
     right_answer = StringField('Richtige Anwort', validators=[DataRequired(), NumberRange(1, 5)])
     submit = SubmitField('Frage absenden')
+
