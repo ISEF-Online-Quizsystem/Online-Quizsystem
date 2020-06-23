@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, ResetPasswordRequestForm, ResetPasswordForm, QuestionForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Question, Answer
 from werkzeug.urls import url_parse
 from datetime import datetime
 from app.email import send_password_reset_email
@@ -141,6 +141,20 @@ def multiplayer():
 @login_required
 def questions():
     form = QuestionForm()
+    if form.validate_on_submit():
+    #     #TODOcurrent_user.username = form.username.data
+    #     #TODOcurrent_user.about_me = form.about_me.data
+    #     #user = User(username=form.username.data, email=form.email.data)
+    #     #user.set_password(form.password.data)
+    #     #db.session.add(user)
+    #     #db.session.commit()
+    #     #flash('Änderungen gespeichert')
+    #     return redirect(url_for('questions'))
+        new_question = Question(question=form.question.data, module_id=form.modules.data)
+        db.session.add(new_question)
+        new_answers = Answer(option_one=form.option_one.data, option_two=form.option_two.data,
+                             option_three=form.option_three.data, option_four=form.option_four.data,
+                             option_five=form.option_five.data)
     return render_template('questions.html', form=form)
 
 

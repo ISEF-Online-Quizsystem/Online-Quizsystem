@@ -67,7 +67,7 @@ class ResetPasswordForm(FlaskForm):
 
 class QuestionForm(FlaskForm):
     modules = SelectField('Wähle einen Kurs aus!', choices=get_modules())
-    question = TextAreaField('Frage', validators=[Length(min=0, max=140)])
+    question = TextAreaField('Frage', validators=[Length(min=0, max=140), DataRequired()])
     option_one = StringField('Antwortoption 1', validators=[DataRequired()])
     option_two = StringField('Antwortoption 2', validators=[DataRequired()])
     option_three = StringField('Antwortoption 3', validators=[DataRequired()])
