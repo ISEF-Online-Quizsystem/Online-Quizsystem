@@ -53,7 +53,7 @@ class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.String(280))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    module_id = db.Column(db.Integer, db.ForeignKey('module.id'))
+    module = db.Column(db.String(128))
     answer_id = db.Column(db.Integer, db.ForeignKey('answer.id'))
 
     def __repr__(self):
@@ -74,4 +74,4 @@ class Answer(db.Model):
 class Module(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), index=True, unique=True)
-    questions = db.relationship('Question', lazy='dynamic')
+
