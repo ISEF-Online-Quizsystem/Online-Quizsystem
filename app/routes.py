@@ -142,12 +142,12 @@ def multiplayer():
 def questions():
     form = QuestionForm()
     if form.validate_on_submit():
-        new_question = Question(question=form.question.data, module=form.modules.data)
-        db.session.add(new_question)
         new_answers = Answer(option_one=form.option_one.data, option_two=form.option_two.data,
                              option_three=form.option_three.data, option_four=form.option_four.data,
                              option_five=form.option_five.data, right_choice=form.right_choice.data)
         db.session.add(new_answers)
+        new_question = Question(question=form.question.data, module=form.modules.data)
+        db.session.add(new_question)
         db.session.commit()
         flash('Die Frage wurde eingereicht.')
         flash('Sie muss noch von einem Tutor freigegeben werden.')

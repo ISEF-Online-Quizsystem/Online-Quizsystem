@@ -8,7 +8,7 @@ def get_modules():
     modules = []
     results = Module.query.filter_by().all()
     for result in results:
-        modules.append(result.name)
+        modules.append((result.name, result.name))
 
     return modules
 
@@ -75,4 +75,3 @@ class QuestionForm(FlaskForm):
     option_five = StringField('Antwortoption 5', validators=[DataRequired()])
     right_choice = IntegerField('Richtige Anwort', validators=[DataRequired(), NumberRange(1, 5)])
     submit = SubmitField('Frage absenden')
-
