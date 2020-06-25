@@ -54,21 +54,15 @@ class Question(db.Model):
     question = db.Column(db.String(280))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     module = db.Column(db.String(128))
-    answer_id = db.Column(db.Integer, db.ForeignKey('answer.id'))
-
-    def __repr__(self):
-        return f'<Question {self.question}>'
-
-
-class Answer(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
     option_one = db.Column(db.String(128))
     option_two = db.Column(db.String(128))
     option_three = db.Column(db.String(128))
     option_four = db.Column(db.String(128))
     option_five = db.Column(db.String(128))
     right_choice = db.Column(db.Integer)
-    question = db.relationship('Question', lazy='dynamic')
+
+    def __repr__(self):
+        return f'<Question {self.question}>'
 
 
 class Module(db.Model):
