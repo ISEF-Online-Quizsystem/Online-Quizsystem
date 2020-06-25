@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, ResetPasswordRequestForm, ResetPasswordForm, QuestionForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Question, Answer
+from app.models import User, Question
 from werkzeug.urls import url_parse
 from datetime import datetime
 from app.email import send_password_reset_email
@@ -142,11 +142,10 @@ def multiplayer():
 def questions():
     form = QuestionForm()
     if form.validate_on_submit():
-        new_answers = Answer(option_one=form.option_one.data, option_two=form.option_two.data,
-                             option_three=form.option_three.data, option_four=form.option_four.data,
-                             option_five=form.option_five.data, right_choice=form.right_choice.data)
-        db.session.add(new_answers)
-        new_question = Question(question=form.question.data, module=form.modules.data)
+        new_question = Question(question=form.question.data, module=form.modules.data,
+                                option_one=form.option_one.data, option_two=form.option_two.data,
+                                option_three=form.option_three.data, option_four=form.option_four.data,
+                                option_five=form.option_five.data, right_choice=form.right_choice.data)
         db.session.add(new_question)
         db.session.commit()
         flash('Die Frage wurde eingereicht.')
