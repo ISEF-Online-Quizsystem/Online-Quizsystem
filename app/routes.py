@@ -128,7 +128,9 @@ def play():
 @app.route('/singleplayer', methods=['GET', 'POST'])
 @login_required
 def singleplayer():
-    return render_template('singleplayer.html')
+    question = Question.query.filter_by().first_or_404()
+
+    return render_template('singleplayer.html', question=question)
 
 
 @app.route('/multiplayer', methods=['GET', 'POST'])
