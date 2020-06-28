@@ -19,6 +19,12 @@
         <label for="option_five">{{ question.option_five }}</label><br>
         <input type="submit" value="Submit">
     </form>
+    <br>
+    <div class="row">
+        <div class="col-md-5">
+            {{ wtf.render_form(form) }}
+        </div>
+    </div>
 
 
 {% endblock %}

@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectField, IntegerField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectField, IntegerField, \
+    RadioField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length, NumberRange
 from app.models import User, Module
 
@@ -73,5 +74,11 @@ class QuestionForm(FlaskForm):
     option_three = StringField('Antwortoption 3', validators=[DataRequired()])
     option_four = StringField('Antwortoption 4', validators=[DataRequired()])
     option_five = StringField('Antwortoption 5', validators=[DataRequired()])
-    right_choice = IntegerField('Richtige Anwort (Gib eine Zahl zwischen 1-5 ein.)', validators=[DataRequired(), NumberRange(1, 5)])
+    right_choice = IntegerField('Richtige Anwort (Gib eine Zahl zwischen 1-5 ein.)',
+                                validators=[DataRequired(), NumberRange(1, 5)])
+    submit = SubmitField('Frage absenden')
+
+
+class QuestionSolve(FlaskForm):
+    radio = RadioField('Label', choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')])
     submit = SubmitField('Frage absenden')

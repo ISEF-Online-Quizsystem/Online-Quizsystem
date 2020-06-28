@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, ResetPasswordRequestForm, ResetPasswordForm, QuestionForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, ResetPasswordRequestForm, ResetPasswordForm, QuestionForm, QuestionSolve
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Question
 from werkzeug.urls import url_parse
@@ -128,9 +128,16 @@ def play():
 @app.route('/singleplayer', methods=['GET', 'POST'])
 @login_required
 def singleplayer():
+    form = QuestionSolve()
     question = Question.query.filter_by().first_or_404()
+    if form.validate_on_submit():
+        if True:
+            flash('Richtig')
+        else:
+            flash('Falsch')
+        return redirect(url_for('singleplayer.html'))
 
-    return render_template('singleplayer.html', question=question)
+    return render_template('singleplayer.html', question=question, form=form)
 
 
 @app.route('/multiplayer', methods=['GET', 'POST'])
