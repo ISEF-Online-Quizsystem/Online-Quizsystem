@@ -135,7 +135,7 @@ def singleplayer():
             flash('Richtig')
         else:
             flash('Falsch')
-        return redirect(url_for('singleplayer.html'))
+        return redirect(url_for('singleplayer'))
 
     return render_template('singleplayer.html', question=question, form=form)
 

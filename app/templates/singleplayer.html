@@ -4,22 +4,7 @@
 {% block app_content %}
     <h1 class="text-center">Einzelspieler-Modus (Zufallsfrage)</h1>
     <br>
-    <form action="">
-        <p>Frage zum Modul {{ question.module }}</p>
-        <p>{{ question.question }}</p>
-        <input type="radio" id="option_one" name="optionen" value="{{ question.option_one }}">
-        <label for="option_one">{{ question.option_one }}</label><br>
-        <input type="radio" id="option_two" name="optionen" value="{{ question.option_two }}">
-        <label for="option_two">{{ question.option_two }}</label><br>
-        <input type="radio" id="option_three" name="optionen" value="{{ question.option_three }}">
-        <label for="option_three">{{ question.option_three }}</label><br>
-        <input type="radio" id="option_four" name="optionen" value="{{ question.option_four }}">
-        <label for="option_four">{{ question.option_four }}</label><br>
-        <input type="radio" id="option_five" name="optionen" value="{{ question.option_five }}">
-        <label for="option_five">{{ question.option_five }}</label><br>
-        <input type="submit" value="Submit">
-    </form>
-    <br>
+    <p>Frage zum Modul {{ question.module }}</p>
     <div class="row">
         <div class="col-md-5">
             {{ wtf.render_form(form) }}

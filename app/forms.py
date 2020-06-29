@@ -80,5 +80,5 @@ class QuestionForm(FlaskForm):
 
 
 class QuestionSolve(FlaskForm):
-    radio = RadioField('Label', choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')])
+    radio = RadioField('Sein oder nicht sein?', choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')])
     submit = SubmitField('Frage absenden')
