@@ -3,6 +3,7 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextA
     RadioField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length, NumberRange
 from app.models import User, Module, Question
+import random
 
 
 def get_modules():
@@ -15,9 +16,10 @@ def get_modules():
 
 
 def get_random_question():
-    result = Question.query.filter_by().first()
+    result = Question.query.filter_by(module='Grundlagen der industriellen Softwaretechnik (IGIS)').all()
+    random.shuffle(result)
 
-    return result
+    return result[0]
 
 
 class LoginForm(FlaskForm):
@@ -85,8 +87,11 @@ class QuestionForm(FlaskForm):
     submit = SubmitField('Frage absenden')
 
 
-class QuestionSolve(FlaskForm):
-    result = get_random_question()
+result = get_random_question()
 
-    radio = RadioField(result.question, choices=[('1', result.option_one), ('2', result.option_two), ('3', result.option_three), ('4', result.option_four)])
+
+class QuestionSolve(FlaskForm):
+    radio = RadioField(result.question,
+                       choices=[('1', result.option_one), ('2', result.option_two), ('3', result.option_three),
+                                ('4', result.option_four)])
     submit = SubmitField('Frage absenden')
