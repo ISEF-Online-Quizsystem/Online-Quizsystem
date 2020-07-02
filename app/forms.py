@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectField, IntegerField, \
     RadioField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length, NumberRange
-from app.models import User, Module
+from app.models import User, Module, Question
 
 
 def get_modules():
@@ -12,6 +12,12 @@ def get_modules():
         modules.append((result.name, result.name))
 
     return modules
+
+
+def get_random_question():
+    result = Question.query.filter_by().first()
+
+    return result
 
 
 class LoginForm(FlaskForm):
@@ -80,5 +86,7 @@ class QuestionForm(FlaskForm):
 
 
 class QuestionSolve(FlaskForm):
-    radio = RadioField('Sein oder nicht sein?', choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')])
+    result = get_random_question()
+
+    radio = RadioField(result.question, choices=[('1', result.option_one), ('2', result.option_two), ('3', result.option_three), ('4', result.option_four)])
     submit = SubmitField('Frage absenden')
