@@ -58,7 +58,6 @@ class Question(db.Model):
     option_two = db.Column(db.String(128))
     option_three = db.Column(db.String(128))
     option_four = db.Column(db.String(128))
-    option_five = db.Column(db.String(128))
     right_choice = db.Column(db.Integer)
 
     def __repr__(self):

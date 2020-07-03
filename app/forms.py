@@ -81,7 +81,6 @@ class QuestionForm(FlaskForm):
     option_two = StringField('Antwortoption 2', validators=[DataRequired()])
     option_three = StringField('Antwortoption 3', validators=[DataRequired()])
     option_four = StringField('Antwortoption 4', validators=[DataRequired()])
-    option_five = StringField('Antwortoption 5', validators=[DataRequired()])
     right_choice = IntegerField('Richtige Anwort (Gib eine Zahl zwischen 1-5 ein.)',
                                 validators=[DataRequired(), NumberRange(1, 5)])
     submit = SubmitField('Frage absenden')
