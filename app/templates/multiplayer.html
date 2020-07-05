@@ -3,5 +3,11 @@
 
 {% block app_content %}
     <h1 class="text-center">Duellmodus</h1>
+    <label for="modules">Wähle einen Kurs aus:</label>
+    <select name="modules" id="modules">
+        {% for item in result %}
+            <option value="{{ item[0] }}">{{ item[0] }}</option>
+        {% endfor %}
+    </select>
 
 {% endblock %}

@@ -1,6 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, ResetPasswordRequestForm, ResetPasswordForm, QuestionForm, QuestionSolve
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, ResetPasswordRequestForm, ResetPasswordForm,\
+                        QuestionForm, QuestionSolve, get_modules
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Question
 from werkzeug.urls import url_parse
@@ -143,7 +144,9 @@ def singleplayer():
 @app.route('/multiplayer', methods=['GET', 'POST'])
 @login_required
 def multiplayer():
-    return render_template('multiplayer.html')
+    result = get_modules()
+
+    return render_template('multiplayer.html', result=result)
 
 
 @app.route('/questions', methods=['GET', 'POST'])
