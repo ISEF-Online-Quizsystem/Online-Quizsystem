@@ -3,6 +3,13 @@
 
 {% block app_content %}
     <h1 class="text-center">Wähle deinen Spielmodus aus</h1>
+    <br>
+        <div class="row">
+        <div class="col-md-5">
+            {{ wtf.render_form(form) }}
+        </div>
+    </div>
+    <br>
     <a href="{{ url_for('singleplayer') }}" class="btn btn-primary btn-lg">Einzelspieler</a>
     <a href="{{ url_for('multiplayer') }}" class="btn btn-primary btn-lg" style="float: right">Duellmodus</a>
 

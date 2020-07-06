@@ -1,7 +1,7 @@
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, make_response
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, ResetPasswordRequestForm, ResetPasswordForm,\
-                        QuestionForm, QuestionSolve, get_modules
+                        QuestionForm, QuestionSolve, get_modules, ModuleForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Question
 from werkzeug.urls import url_parse
@@ -123,7 +123,11 @@ def reset_password(token):
 @app.route('/play', methods=['GET', 'POST'])
 @login_required
 def play():
-    return render_template('play.html')
+    form = ModuleForm()
+    if form.validate_on_submit():
+        flash(form.modules.data + ' ausgewählt')
+        return redirect(url_for('play'))
+    return render_template('play.html', form=form)
 
 
 @app.route('/singleplayer', methods=['GET', 'POST'])

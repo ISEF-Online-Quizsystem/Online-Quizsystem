@@ -94,3 +94,8 @@ class QuestionSolve(FlaskForm):
                        choices=[('1', result.option_one), ('2', result.option_two), ('3', result.option_three),
                                 ('4', result.option_four)])
     submit = SubmitField('Frage absenden')
+
+
+class ModuleForm(FlaskForm):
+    modules = SelectField('Wähle einen Kurs aus!', choices=get_modules())
+    submit = SubmitField('Kurs setzen')
