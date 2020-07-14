@@ -16,7 +16,7 @@ def get_modules():
 
 
 def get_random_question():
-    result = Question.query.filter_by(module='Grundlagen der industriellen Softwaretechnik (IGIS)').all()
+    result = Question.query.filter_by(module='Mathematik Grundlagen I (IMT101)').all()
     random.shuffle(result)
 
     return result[0]
