@@ -98,4 +98,4 @@ class QuestionSolve(FlaskForm):
 
 class ModuleForm(FlaskForm):
     modules = SelectField('Wähle einen Kurs aus!', choices=get_modules())
-    submit = SubmitField('Kurs setzen')
+    submit = SubmitField('Auswählen')

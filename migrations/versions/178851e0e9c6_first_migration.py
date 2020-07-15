@@ -1,8 +1,8 @@
-"""initial setup
+"""first migration
 
-Revision ID: 186ec51581de
+Revision ID: 178851e0e9c6
 Revises: 
-Create Date: 2020-06-25 13:26:18.862082
+Create Date: 2020-07-14 12:50:02.892130
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '186ec51581de'
+revision = '178851e0e9c6'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,6 +21,7 @@ def upgrade():
     op.create_table('module',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=128), nullable=True),
+    sa.Column('status', sa.Boolean(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_module_name'), 'module', ['name'], unique=True)
@@ -33,8 +34,8 @@ def upgrade():
     sa.Column('option_two', sa.String(length=128), nullable=True),
     sa.Column('option_three', sa.String(length=128), nullable=True),
     sa.Column('option_four', sa.String(length=128), nullable=True),
-    sa.Column('option_five', sa.String(length=128), nullable=True),
     sa.Column('right_choice', sa.Integer(), nullable=True),
+    sa.Column('status', sa.Boolean(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_question_timestamp'), 'question', ['timestamp'], unique=False)
@@ -46,6 +47,7 @@ def upgrade():
     sa.Column('about_me', sa.String(length=140), nullable=True),
     sa.Column('last_seen', sa.DateTime(), nullable=True),
     sa.Column('tutor', sa.Boolean(), nullable=True),
+    sa.Column('score', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_user_email'), 'user', ['email'], unique=True)

@@ -70,3 +70,9 @@ class Module(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), index=True, unique=True)
     status = db.Column(db.Boolean, default=False)
+
+    def set_status_active(self):
+        self.status = True
+
+    def set_status_inactive(self):
+        self.status = False

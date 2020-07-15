@@ -1,9 +1,9 @@
 from flask import render_template, url_for, flash, redirect, request, make_response
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, ResetPasswordRequestForm, ResetPasswordForm,\
-                        QuestionForm, QuestionSolve, get_modules, ModuleForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, ResetPasswordRequestForm, ResetPasswordForm, \
+    QuestionForm, QuestionSolve, get_modules, ModuleForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Question
+from app.models import User, Question, Module
 from werkzeug.urls import url_parse
 from datetime import datetime
 from app.email import send_password_reset_email
@@ -119,12 +119,19 @@ def reset_password(token):
     return render_template('reset_password.html', form=form)
 
 
-
 @app.route('/play', methods=['GET', 'POST'])
 @login_required
 def play():
     form = ModuleForm()
     if form.validate_on_submit():
+        modules = Module.query.filter_by().all()
+        for i in modules:
+            i.set_status_inactive()
+
+        db.session.commit()
+        # active = Module.query.filter_by(status=None).all()
+        # print(active)
+
         flash(form.modules.data + ' ausgewählt')
         return redirect(url_for('play'))
     return render_template('play.html', form=form)
@@ -174,5 +181,3 @@ def questions():
 @login_required
 def highscore():
     return render_template('highscore.html')
-
-
