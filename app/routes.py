@@ -136,7 +136,8 @@ def play():
 @login_required
 def singleplayer():
     form = QuestionSolve()
-    question = Question.query.filter_by().first_or_404()
+    module = Module.query.filter_by(status=True).first_or_404()
+    question = Question.query.filter_by(module=module.name).first_or_404()
     if form.validate_on_submit():
         if question.right_choice == int(form.radio.data):
             flash('Richtig')
