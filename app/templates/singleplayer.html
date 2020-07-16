@@ -5,7 +5,7 @@
     <h1 class="text-center">Einzelspieler-Modus</h1>
     <br>
 
-    <p>Frage zum Modul {{ question.module }}</p>
+    <p>Frage zum Modul {{ question[0].module }}</p>
     <div class="row">
         <div class="col-md-5">
             {{ wtf.render_form(form) }}

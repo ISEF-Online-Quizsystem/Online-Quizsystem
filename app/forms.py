@@ -16,7 +16,8 @@ def get_modules():
 
 
 def get_random_question():
-    result = Question.query.filter_by(module='Mathematik Grundlagen I (IMT101)').all()
+    module = Module.query.filter_by(status=True).first_or_404()
+    result = Question.query.filter_by(module=module.name).all()
     random.shuffle(result)
 
     return result[0]
