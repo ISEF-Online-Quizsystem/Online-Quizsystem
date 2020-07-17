@@ -119,14 +119,22 @@ def reset_password(token):
     return render_template('reset_password.html', form=form)
 
 
+def all_module_inactive():
+    modules = Module.query.filter_by().all()
+    for module in modules:
+        module.status = False
+
+
 @app.route('/play', methods=['GET', 'POST'])
 @login_required
 def play():
     form = ModuleForm()
     if form.validate_on_submit():
         module = Module.query.filter_by(name=form.modules.data).first_or_404()
-        module.set_status_active()
-        db.session.commit()
+        if not module.status:
+            all_module_inactive()
+            module.set_status_active()
+            db.session.commit()
         flash(form.modules.data + ' ausgewählt')
         return redirect(url_for('play'))
     return render_template('play.html', form=form)
