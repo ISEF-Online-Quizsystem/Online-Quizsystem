@@ -20,7 +20,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
-    tutor = db.Column(db.Boolean, default=False)
+    tutor = db.Column(db.Boolean, default=0)
     score = db.Column(db.Integer)
 
     def __repr__(self):
@@ -60,7 +60,7 @@ class Question(db.Model):
     option_three = db.Column(db.String(128))
     option_four = db.Column(db.String(128))
     right_choice = db.Column(db.Integer)
-    status = db.Column(db.Boolean, default=False)
+    status = db.Column(db.Boolean, default=0)
 
     def __repr__(self):
         return f'<Question {self.question}>'
@@ -69,10 +69,10 @@ class Question(db.Model):
 class Module(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), index=True, unique=True)
-    status = db.Column(db.Boolean, default=False)
+    status = db.Column(db.Boolean, default=0)
 
     def set_status_active(self):
-        self.status = True
+        self.status = 1
 
     def set_status_inactive(self):
-        self.status = False
+        self.status = 0
