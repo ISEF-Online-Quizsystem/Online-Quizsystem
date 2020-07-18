@@ -147,7 +147,7 @@ def singleplayer():
     module = Module.query.filter_by(status=1).first_or_404()
     question = Question.query.filter_by(module=module.name).all()
     if form.validate_on_submit():
-        if question.right_choice == int(form.radio.data):
+        if question[0].right_choice == int(form.radio.data):
             flash('Richtig')
         else:
             flash('Falsch')
