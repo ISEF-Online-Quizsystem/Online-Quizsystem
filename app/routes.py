@@ -146,6 +146,9 @@ def singleplayer():
     form = QuestionSolve()
     module = Module.query.filter_by(status=1).first_or_404()
     question = Question.query.filter_by(module=module.name).all()
+    form.radio.label.text = question[0].question
+    form.radio.choices = [('1', question[0].option_one), ('2', question[0].option_two), ('3', question[0].option_three),
+                          ('4', question[0].option_four)]
     if form.validate_on_submit():
         if question[0].right_choice == int(form.radio.data):
             flash('Richtig')
