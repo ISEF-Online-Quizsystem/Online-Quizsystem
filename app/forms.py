@@ -15,12 +15,12 @@ def get_modules():
     return modules
 
 
-def get_random_question():
-    module = Module.query.filter_by(status=1).first_or_404()
-    result = Question.query.filter_by(module=module.name).all()
-    random.shuffle(result)
-
-    return result[0]
+# def get_random_question():
+#     module = Module.query.filter_by(status=1).first_or_404()
+#     result = Question.query.filter_by(module=module.name).all()
+#     random.shuffle(result)
+#
+#     return result[0]
 
 
 class LoginForm(FlaskForm):
@@ -87,13 +87,13 @@ class QuestionForm(FlaskForm):
     submit = SubmitField('Frage absenden')
 
 
-result = get_random_question()
+# result = get_random_question()
 
 
 class QuestionSolve(FlaskForm):
-    radio = RadioField(result.question,
-                       choices=[('1', result.option_one), ('2', result.option_two), ('3', result.option_three),
-                                ('4', result.option_four)])
+    radio = RadioField('',
+                       choices=[('1', ''), ('2', ''), ('3', ''),
+                                ('4', '')])
     submit = SubmitField('Frage absenden')
 
 

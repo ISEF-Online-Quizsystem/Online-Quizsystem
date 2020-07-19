@@ -145,18 +145,28 @@ def play():
 def singleplayer():
     form = QuestionSolve()
     module = Module.query.filter_by(status=1).first_or_404()
-    question = Question.query.filter_by(module=module.name).all()
-    form.radio.label.text = question[0].question
-    form.radio.choices = [('1', question[0].option_one), ('2', question[0].option_two), ('3', question[0].option_three),
-                          ('4', question[0].option_four)]
-    if form.validate_on_submit():
-        if question[0].right_choice == int(form.radio.data):
-            flash('Richtig')
-        else:
-            flash('Falsch')
-        return redirect(url_for('singleplayer'))
+    # question = Question.query.filter_by(module=module.name).all()
+    # for q in question:
+    #     form.radio.label.text = q[0].question
+    #     form.radio.choices = [('1', q[0].option_one), ('2', q[0].option_two),
+    #                           ('3', q[0].option_three),
+    #                           ('4', q[0].option_four)]
+    try:
+        q = Question.query.filter_by(module=module.name).all()
+        form.radio.label.text = q[0].question
+        form.radio.choices = [('1', q[0].option_one), ('2', q[0].option_two),
+                            ('3', q[0].option_three),
+                            ('4', q[0].option_four)]
+        if form.validate_on_submit():
+            if q[0].right_choice == int(form.radio.data):
+                flash('Richtig')
+            else:
+                flash('Falsch')
+            return redirect(url_for('singleplayer'))
+    except:
+        return render_template('noquestion.html')
 
-    return render_template('singleplayer.html', question=question, form=form)
+    return render_template('singleplayer.html', question=q, form=form)
 
 
 @app.route('/multiplayer', methods=['GET', 'POST'])
@@ -175,7 +185,7 @@ def questions():
         new_question = Question(question=form.question.data, module=form.modules.data,
                                 option_one=form.option_one.data, option_two=form.option_two.data,
                                 option_three=form.option_three.data, option_four=form.option_four.data,
-                                option_five=form.option_five.data, right_choice=form.right_choice.data)
+                                right_choice=form.right_choice.data)
         db.session.add(new_question)
         db.session.commit()
         flash('Die Frage wurde eingereicht.')
