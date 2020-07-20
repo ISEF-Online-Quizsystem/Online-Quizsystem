@@ -155,8 +155,8 @@ def singleplayer():
         q = Question.query.filter_by(module=module.name).all()
         form.radio.label.text = q[0].question
         form.radio.choices = [('1', q[0].option_one), ('2', q[0].option_two),
-                            ('3', q[0].option_three),
-                            ('4', q[0].option_four)]
+                              ('3', q[0].option_three),
+                              ('4', q[0].option_four)]
         if form.validate_on_submit():
             if q[0].right_choice == int(form.radio.data):
                 flash('Richtig')
