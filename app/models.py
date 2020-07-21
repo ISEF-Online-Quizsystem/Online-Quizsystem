@@ -60,7 +60,7 @@ class Question(db.Model):
     option_three = db.Column(db.String(256))
     option_four = db.Column(db.String(256))
     right_choice = db.Column(db.Integer)
-    status = db.Column(db.Boolean, default=0)
+    status = db.Column(db.Integer, default=0)
 
     def __repr__(self):
         return f'<Question {self.question}>'

@@ -140,19 +140,23 @@ def play():
     return render_template('play.html', form=form)
 
 
+def reset_status():
+    module = Module.query.filter_by(status=1).first_or_404()
+    questions = Question.query.filter_by(module=module.name).all()
+    for q in questions:
+        q.status = 0
+    db.session.commit()
+
+
 @app.route('/singleplayer', methods=['GET', 'POST'])
 @login_required
 def singleplayer():
     form = QuestionSolve()
     module = Module.query.filter_by(status=1).first_or_404()
-    # question = Question.query.filter_by(module=module.name).all()
-    # for q in question:
-    #     form.radio.label.text = q[0].question
-    #     form.radio.choices = [('1', q[0].option_one), ('2', q[0].option_two),
-    #                           ('3', q[0].option_three),
-    #                           ('4', q[0].option_four)]
     try:
-        q = Question.query.filter_by(module=module.name).all()
+        q = Question.query.filter_by(module=module.name, status=0).all()
+        if len(q) == 0:
+            reset_status()
         form.radio.label.text = q[0].question
         form.radio.choices = [('1', q[0].option_one), ('2', q[0].option_two),
                               ('3', q[0].option_three),
@@ -160,9 +164,14 @@ def singleplayer():
         if form.validate_on_submit():
             if q[0].right_choice == int(form.radio.data):
                 flash('Richtig')
+                q[0].status = 1
+                db.session.commit()
             else:
                 flash('Falsch')
-            return redirect(url_for('singleplayer'))
+                q[0].status = 2
+                db.session.commit()
+
+            return render_template('singleplayer.html', question=q, form=form)
     except:
         return render_template('noquestion.html')
 
