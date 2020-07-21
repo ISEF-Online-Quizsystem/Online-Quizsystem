@@ -151,11 +151,14 @@ def reset_status():
 @app.route('/singleplayer', methods=['GET', 'POST'])
 @login_required
 def singleplayer():
+    global right, wrong
     form = QuestionSolve()
     module = Module.query.filter_by(status=1).first_or_404()
     try:
         q = Question.query.filter_by(module=module.name, status=0).all()
         if len(q) == 0:
+            right = len(Question.query.filter_by(module=module.name, status=1).all())
+            wrong = len(Question.query.filter_by(module=module.name, status=2).all())
             reset_status()
         form.radio.label.text = q[0].question
         form.radio.choices = [('1', q[0].option_one), ('2', q[0].option_two),
@@ -171,9 +174,9 @@ def singleplayer():
                 q[0].status = 2
                 db.session.commit()
 
-            return render_template('singleplayer.html', question=q, form=form)
+            return redirect(url_for('singleplayer'))
     except:
-        return render_template('noquestion.html')
+        return render_template('result.html', right=right, wrong=wrong)
 
     return render_template('singleplayer.html', question=q, form=form)
 

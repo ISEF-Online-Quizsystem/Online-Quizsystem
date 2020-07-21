@@ -21,7 +21,7 @@ class User(UserMixin, db.Model):
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     tutor = db.Column(db.Boolean, default=0)
-    score = db.Column(db.Integer)
+    score = db.Column(db.Integer, default=0)
 
     def __repr__(self):
         return f'<User {self.username}>'
