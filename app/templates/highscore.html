@@ -13,36 +13,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>BrüTo</td>
-          <td>123</td>
-          <td>97</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>ChristineRa</td>
-          <td>146</td>
-          <td>94</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Hung-D</td>
-          <td>109</td>
-          <td>87</td>
-        </tr>
-        <tr>
-          <th scope="row">4</th>
-          <td>rubi997 </td>
-          <td>104</td>
-          <td>86</td>
-        </tr>
-        <tr>
-          <th scope="row">5</th>
-          <td>starmaerker</td>
-          <td>111</td>
-          <td>84</td>
-        </tr>
+          {% for u in user %}
+            <tr>
+              <th scope="row">{{ user.index(u) + 1 }}</th>
+              <td>{{ u.username }}</td>
+              <td>-</td>
+              <td>{{ u.score }}</td>
+            </tr>
+          {% endfor %}
       </tbody>
     </table>
 
