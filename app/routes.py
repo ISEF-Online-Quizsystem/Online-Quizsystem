@@ -168,6 +168,7 @@ def singleplayer():
             if q[0].right_choice == int(form.radio.data):
                 flash('Richtig')
                 q[0].status = 1
+                current_user.score = current_user.score + 1
                 db.session.commit()
             else:
                 flash('Falsch')
@@ -176,7 +177,7 @@ def singleplayer():
 
             return redirect(url_for('singleplayer'))
     except:
-        return render_template('result.html', right=right, wrong=wrong)
+        return render_template('result.html', right=right, wrong=wrong, score=current_user.score)
 
     return render_template('singleplayer.html', question=q, form=form)
 

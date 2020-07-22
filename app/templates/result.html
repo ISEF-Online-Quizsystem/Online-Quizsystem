@@ -7,6 +7,7 @@
     {% else %}
     <h2>Richtige Antworten: {{ right }}</h2>
     <h2>Falsche Antworten: {{ wrong }}</h2>
+    <h2>Gesamtpunktzahl: {{ score }}</h2>
     <p><span><a href="{{ url_for('singleplayer') }}">Noch mal!</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="{{ url_for('play') }}">Zurück</a></span></p>
     {% endif %}
 {% endblock %}
