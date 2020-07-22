@@ -177,7 +177,7 @@ def singleplayer():
 
             return redirect(url_for('singleplayer'))
     except:
-        return render_template('result.html', right=right, wrong=wrong, score=current_user.score)
+        return redirect(url_for('result'))
 
     return render_template('singleplayer.html', question=q, form=form)
 
@@ -211,3 +211,9 @@ def questions():
 @login_required
 def highscore():
     return render_template('highscore.html')
+
+
+@app.route('/result')
+@login_required
+def result():
+    return render_template('result.html', right=right, wrong=wrong, score=current_user.score)
