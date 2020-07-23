@@ -22,6 +22,7 @@ class User(UserMixin, db.Model):
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     tutor = db.Column(db.Boolean, default=0)
     score = db.Column(db.Integer, default=0)
+    number_of_questions = db.Column(db.Integer, default=0)
 
     def __repr__(self):
         return f'<User {self.username}>'

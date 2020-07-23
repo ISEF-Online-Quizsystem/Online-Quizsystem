@@ -169,10 +169,12 @@ def singleplayer():
                 flash('Richtig')
                 q[0].status = 1
                 current_user.score = current_user.score + 1
+                current_user.number_of_questions = current_user.number_of_questions + 1
                 db.session.commit()
             else:
                 flash('Falsch')
                 q[0].status = 2
+                current_user.number_of_questions = current_user.number_of_questions + 1
                 db.session.commit()
 
             return redirect(url_for('singleplayer'))

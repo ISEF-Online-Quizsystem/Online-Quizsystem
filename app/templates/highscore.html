@@ -9,7 +9,7 @@
           <th scope="col">Platz</th>
           <th scope="col">Benutzername</th>
           <th scope="col">Fragenanzahl</th>
-          <th scope="col">Wertung</th>
+          <th scope="col">Richtige Fragen</th>
         </tr>
       </thead>
       <tbody>
@@ -17,7 +17,7 @@
             <tr>
               <th scope="row">{{ user.index(u) + 1 }}</th>
               <td>{{ u.username }}</td>
-              <td>-</td>
+              <td>{{ u.number_of_questions }}</td>
               <td>{{ u.score }}</td>
             </tr>
           {% endfor %}
