@@ -7,6 +7,7 @@ from app.models import User, Question, Module
 from werkzeug.urls import url_parse
 from datetime import datetime
 from app.email import send_password_reset_email
+import random
 
 
 @app.before_request
@@ -156,6 +157,7 @@ def singleplayer():
     module = Module.query.filter_by(status=1).first_or_404()
     try:
         q = Question.query.filter_by(module=module.name, status=0).all()
+        random.shuffle(q)
         if len(q) == 0:
             right = len(Question.query.filter_by(module=module.name, status=1).all())
             wrong = len(Question.query.filter_by(module=module.name, status=2).all())
