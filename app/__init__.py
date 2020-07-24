@@ -21,6 +21,9 @@ mail = Mail(app)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 
+with app.app_context():
+    db.init_app(app)
+
 
 if not app.debug:
     if app.config['MAIL_SERVER']:
