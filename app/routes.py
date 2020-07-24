@@ -153,14 +153,16 @@ def reset_status():
 @login_required
 def singleplayer():
     global right, wrong
+    question_number = 1
     form = QuestionSolve()
     module = Module.query.filter_by(status=1).first_or_404()
     try:
         q = Question.query.filter_by(module=module.name, status=0).all()
+        right = len(Question.query.filter_by(module=module.name, status=1).all())
+        wrong = len(Question.query.filter_by(module=module.name, status=2).all())
+        question_number = question_number + right + wrong
         random.shuffle(q)
         if len(q) == 0:
-            right = len(Question.query.filter_by(module=module.name, status=1).all())
-            wrong = len(Question.query.filter_by(module=module.name, status=2).all())
             reset_status()
         form.radio.label.text = q[0].question
         form.radio.choices = [('1', q[0].option_one), ('2', q[0].option_two),
@@ -183,7 +185,7 @@ def singleplayer():
     except:
         return redirect(url_for('result'))
 
-    return render_template('singleplayer.html', question=q, form=form)
+    return render_template('singleplayer.html', question=q, form=form, question_number=question_number)
 
 
 @app.route('/multiplayer', methods=['GET', 'POST'])
