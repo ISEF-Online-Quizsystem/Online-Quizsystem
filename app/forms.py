@@ -95,6 +95,7 @@ class QuestionSolve(FlaskForm):
                        choices=[('1', ''), ('2', ''), ('3', ''),
                                 ('4', '')])
     submit = SubmitField('Frage absenden')
+    report = SubmitField('Frage melden')
 
 
 class ModuleForm(FlaskForm):

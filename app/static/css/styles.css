@@ -1,3 +1,19 @@
 body {
-    background: aqua;
+
+}
+
+#report {
+	padding: .25rem .5rem;
+	font-size: .875rem;
+	line-height: 1.5;
+	border-radius: .2rem;
+	color: #fff;
+	background-color: #17a2b8;
+	border-color: #17a2b8;
+}
+
+#report:hover {
+	color: #fff;
+	background-color: #138496;
+	border-color: #117a8b;
 }
