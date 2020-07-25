@@ -216,9 +216,8 @@ def questions():
 @app.route('/highscore', methods=['GET', 'POST'])
 @login_required
 def highscore():
-    user = User.query.filter_by().all()
+    user = User.query.filter_by(tutor=0).all()
     user.sort(key=lambda x: x.score, reverse=True)
-    #print([item.username for item in user])
     return render_template('highscore.html', user=user)
 
 
