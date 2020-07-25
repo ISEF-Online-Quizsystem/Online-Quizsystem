@@ -182,6 +182,10 @@ def singleplayer():
                 db.session.commit()
 
             return redirect(url_for('singleplayer'))
+        if form.submit():
+            if form.report.data:
+                flash('Frage wurde dem Tutor gemeldet.')
+
     except:
         return redirect(url_for('result'))
 
