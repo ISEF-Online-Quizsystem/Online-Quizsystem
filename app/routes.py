@@ -157,7 +157,7 @@ def singleplayer():
     form = QuestionSolve()
     module = Module.query.filter_by(status=1).first_or_404()
     try:
-        q = Question.query.filter_by(module=module.name, status=0).all()
+        q = Question.query.filter_by(module=module.name, status=0, released=1).all()
         right = len(Question.query.filter_by(module=module.name, status=1).all())
         wrong = len(Question.query.filter_by(module=module.name, status=2).all())
         question_number = question_number + right + wrong
@@ -169,22 +169,25 @@ def singleplayer():
                               ('3', q[0].option_three),
                               ('4', q[0].option_four)]
         if form.validate_on_submit():
-            if q[0].right_choice == int(form.radio.data):
-                flash('Richtig')
-                q[0].status = 1
-                current_user.score = current_user.score + 1
-                current_user.number_of_questions = current_user.number_of_questions + 1
-                db.session.commit()
-            else:
-                flash('Falsch')
-                q[0].status = 2
-                current_user.number_of_questions = current_user.number_of_questions + 1
+            if form.radio.data:
+                if q[0].right_choice == int(form.radio.data):
+                    flash('Richtig')
+                    q[0].status = 1
+                    current_user.score = current_user.score + 1
+                    current_user.number_of_questions = current_user.number_of_questions + 1
+                    db.session.commit()
+                else:
+                    flash('Falsch')
+                    q[0].status = 2
+                    current_user.number_of_questions = current_user.number_of_questions + 1
+                    db.session.commit()
+
+            if form.report.data:
+                flash('Frage wurde dem Tutor gemeldet.')
+                q[0].released = 2
                 db.session.commit()
 
             return redirect(url_for('singleplayer'))
-        if form.submit():
-            if form.report.data:
-                flash('Frage wurde dem Tutor gemeldet.')
 
     except:
         return redirect(url_for('result'))

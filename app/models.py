@@ -62,6 +62,7 @@ class Question(db.Model):
     option_four = db.Column(db.String(256))
     right_choice = db.Column(db.Integer)
     status = db.Column(db.Integer, default=0)
+    released = db.Column(db.Integer, default=0)
 
     def __repr__(self):
         return f'<Question {self.question}>'
