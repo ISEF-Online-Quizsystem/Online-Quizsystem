@@ -232,3 +232,9 @@ def highscore():
 @login_required
 def result():
     return render_template('result.html', right=right, wrong=wrong, score=current_user.score)
+
+
+@app.route('/release')
+@login_required
+def release():
+    return render_template('release.html')

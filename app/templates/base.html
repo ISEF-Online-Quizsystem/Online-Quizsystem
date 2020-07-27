@@ -31,7 +31,10 @@
                         <ul class="navbar-nav mr-auto">
                              <li class="nav-item active"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
                              <li class="nav-item"><a class="nav-link" href="{{ url_for('play') }}">Spielen</a></li>
-                             <li class="nav-item"><a class="nav-link" href="{{ url_for('questions') }}">Fragen</a></li>
+                             <li class="nav-item"><a class="nav-link" href="{{ url_for('questions') }}">Frageneingabe</a></li>
+                             {% if current_user.tutor %}
+                             <li class="nav-item"><a class="nav-link" href="{{ url_for('release') }}">Fragenfreigabe</a></li>
+                             {% endif %}
                              <li class="nav-item"><a class="nav-link" href="{{ url_for('highscore') }}">Rangliste</a></li>
                         </ul>
                         <ul class="navbar-nav navbar-right">
