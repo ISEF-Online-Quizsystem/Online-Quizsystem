@@ -15,14 +15,6 @@ def get_modules():
     return modules
 
 
-# def get_random_question():
-#     module = Module.query.filter_by(status=1).first_or_404()
-#     result = Question.query.filter_by(module=module.name).all()
-#     random.shuffle(result)
-#
-#     return result[0]
-
-
 class LoginForm(FlaskForm):
     username = StringField('Benutzername', validators=[DataRequired()])
     password = PasswordField('Passwort', validators=[DataRequired()])
@@ -87,7 +79,19 @@ class QuestionForm(FlaskForm):
     submit = SubmitField('Frage absenden')
 
 
-# result = get_random_question()
+class ReleaseForm(FlaskForm):
+    module = StringField('Modul', validators=[Length(min=0, max=256), DataRequired()])
+    question = TextAreaField('Frage', validators=[Length(min=0, max=280), DataRequired()])
+    option_one = StringField('Antwortoption 1', validators=[Length(min=0, max=256), DataRequired()])
+    option_two = StringField('Antwortoption 2', validators=[Length(min=0, max=256), DataRequired()])
+    option_three = StringField('Antwortoption 3', validators=[Length(min=0, max=256), DataRequired()])
+    option_four = StringField('Antwortoption 4', validators=[Length(min=0, max=256), DataRequired()])
+    right_choice = IntegerField('Richtige Anwort (Gib eine Zahl zwischen 1-4 ein.)',
+                                validators=[DataRequired(), NumberRange(1, 4)])
+    update = SubmitField('Frage updaten')
+    okay = SubmitField('Frage ist OK')
+
+
 
 
 class QuestionSolve(FlaskForm):

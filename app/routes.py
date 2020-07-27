@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request, make_response
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, ResetPasswordRequestForm, ResetPasswordForm, \
-    QuestionForm, QuestionSolve, get_modules, ModuleForm
+    QuestionForm, QuestionSolve, get_modules, ModuleForm, ReleaseForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Question, Module
 from werkzeug.urls import url_parse
@@ -234,7 +234,37 @@ def result():
     return render_template('result.html', right=right, wrong=wrong, score=current_user.score)
 
 
-@app.route('/release')
+@app.route('/release', methods=['GET', 'POST'])
 @login_required
 def release():
-    return render_template('release.html')
+    form = ReleaseForm()
+    try:
+        q = Question.query.filter_by(released=2).all()
+        if len(q) == 0:
+            flash('Keine Fragen zum Freigeben vorhanden.')
+            return redirect(url_for('index'))
+        form.module.data = q[0].module
+        form.question.data = q[0].question
+        form.option_one.data = q[0].option_one
+        form.option_two.data = q[0].option_two
+        form.option_three.data = q[0].option_three
+        form.option_four.data = q[0].option_four
+        form.right_choice.data = q[0].right_choice
+
+        if form.validate_on_submit():
+            if form.update.data:
+                flash('Frage wurde aktualisiert.')
+                q[0].released = 1
+                db.session.commit()
+
+            if form.okay.data:
+                flash('Frage wurde wieder freigegeben.')
+                q[0].released = 1
+                db.session.commit()
+
+            return redirect(url_for('release'))
+
+    except:
+        return redirect(url_for('index'))
+
+    return render_template('release.html', form=form)
