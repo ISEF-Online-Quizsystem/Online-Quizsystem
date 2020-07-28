@@ -88,10 +88,7 @@ class ReleaseForm(FlaskForm):
     option_four = StringField('Antwortoption 4', validators=[Length(min=0, max=256), DataRequired()])
     right_choice = IntegerField('Richtige Anwort (Gib eine Zahl zwischen 1-4 ein.)',
                                 validators=[DataRequired(), NumberRange(1, 4)])
-    update = SubmitField('Frage updaten')
-    okay = SubmitField('Frage ist OK')
-
-
+    release = SubmitField('Frage freigeben')
 
 
 class QuestionSolve(FlaskForm):
