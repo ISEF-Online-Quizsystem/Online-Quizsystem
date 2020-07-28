@@ -130,6 +130,7 @@ def all_module_inactive():
 @login_required
 def play():
     form = ModuleForm()
+    reset_status()
     if form.validate_on_submit():
         module = Module.query.filter_by(name=form.modules.data).first_or_404()
         if not module.status:
@@ -161,7 +162,7 @@ def singleplayer():
         right = len(Question.query.filter_by(module=module.name, status=1).all())
         wrong = len(Question.query.filter_by(module=module.name, status=2).all())
         question_number = question_number + right + wrong
-        random.shuffle(q)
+        #random.shuffle(q)
         if len(q) == 0:
             reset_status()
         form.radio.label.text = q[0].question
