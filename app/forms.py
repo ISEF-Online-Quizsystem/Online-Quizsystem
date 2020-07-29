@@ -89,6 +89,7 @@ class ReleaseForm(FlaskForm):
     right_choice = IntegerField('Richtige Anwort (Gib eine Zahl zwischen 1-4 ein.)',
                                 validators=[DataRequired(), NumberRange(1, 4)])
     release = SubmitField('Frage freigeben')
+    deny = SubmitField('Frage ablehnen')
 
 
 class QuestionSolve(FlaskForm):

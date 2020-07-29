@@ -253,16 +253,21 @@ def release():
         form.right_choice.data = q[0].right_choice
 
         if form.validate_on_submit():
-            flash('Frage wurde aktualisiert.')
-            q[0].module = form.module.raw_data[0]
-            q[0].question = form.question.raw_data[0]
-            q[0].option_one = form.option_one.raw_data[0]
-            q[0].option_two = form.option_two.raw_data[0]
-            q[0].option_three = form.option_three.raw_data[0]
-            q[0].option_four = form.option_four.raw_data[0]
-            q[0].right_choice = form.right_choice.raw_data[0]
-            q[0].released = 1
-            db.session.commit()
+            if form.release.data:
+                flash('Frage wurde aktualisiert.')
+                q[0].module = form.module.raw_data[0]
+                q[0].question = form.question.raw_data[0]
+                q[0].option_one = form.option_one.raw_data[0]
+                q[0].option_two = form.option_two.raw_data[0]
+                q[0].option_three = form.option_three.raw_data[0]
+                q[0].option_four = form.option_four.raw_data[0]
+                q[0].right_choice = form.right_choice.raw_data[0]
+                q[0].released = 1
+                db.session.commit()
+            if form.deny.data:
+                flash('Frage abgelehnt')
+                q[0].released = 2
+                db.session.commit()
 
             return redirect(url_for('release'))
 
