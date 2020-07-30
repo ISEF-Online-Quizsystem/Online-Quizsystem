@@ -163,8 +163,9 @@ def singleplayer():
         wrong = len(Question.query.filter_by(module=module.name, status=2).all())
         question_number = question_number + right + wrong
         #random.shuffle(q)
-        if len(q) == 0:
+        if len(q) == 0 or question_number > 10:
             reset_status()
+            return redirect(url_for('result'))
         form.radio.label.text = q[0].question
         form.radio.choices = [('1', q[0].option_one), ('2', q[0].option_two),
                               ('3', q[0].option_three),
