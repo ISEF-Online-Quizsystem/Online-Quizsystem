@@ -159,9 +159,9 @@ def singleplayer():
     module = Module.query.filter_by(status=1).first_or_404()
     try:
         q = Question.query.filter_by(module=module.name, status=0, released=1).all()
-        right = len(Question.query.filter_by(module=module.name, status=1).all())
-        wrong = len(Question.query.filter_by(module=module.name, status=2).all())
-        question_number = question_number + right + wrong
+        right = (Question.query.filter_by(module=module.name, status=1).all())
+        wrong = (Question.query.filter_by(module=module.name, status=2).all())
+        question_number = question_number + len(right) + len(wrong)
         #random.shuffle(q)
         if len(q) == 0 or question_number > 10:
             reset_status()
@@ -233,7 +233,7 @@ def highscore():
 @app.route('/result')
 @login_required
 def result():
-    return render_template('result.html', right=right, wrong=wrong, score=current_user.score)
+    return render_template('result.html', right=len(right), wrong=len(wrong), score=current_user.score)
 
 
 @app.route('/release', methods=['GET', 'POST'])

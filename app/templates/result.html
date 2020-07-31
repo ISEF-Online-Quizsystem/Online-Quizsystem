@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    {% if right==0 and wrong==0 %}
-    <h2>Leider gibt es noch keine Fragen zu diesem Modul.</h2>
-    <p><a href="{{ url_for('play') }}">Zurück</a></p>
-    {% else %}
-    <h2>Richtige Antworten: {{ right }}</h2>
-    <h2>Falsche Antworten: {{ wrong }}</h2>
-    <h2>Gesamtpunktzahl: {{ score }}</h2>
-    <p><span><a href="{{ url_for('singleplayer') }}">Noch mal!</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="{{ url_for('play') }}">Zurück</a></span></p>
-    {% endif %}
+    <div class="text-center">
+        {% if right==0 and wrong==0 %}
+        <h2>Leider gibt es noch keine Fragen zu diesem Modul.</h2>
+        <p><a href="{{ url_for('play') }}">Zurück</a></p>
+        {% else %}
+        <h2>Richtige Antworten: {{ right }}</h2>
+        <h2>Falsche Antworten: {{ wrong }}</h2>
+        <h2>Gesamtpunktzahl: {{ score }}</h2>
+        <p><span id="left_result"><a href="{{ url_for('singleplayer') }}">Noch mal!</a></span><span id="right_result"><a href="{{ url_for('play') }}">Zur Spielseite</a></span></p>
+        {% endif %}
+    </div>
 {% endblock %}

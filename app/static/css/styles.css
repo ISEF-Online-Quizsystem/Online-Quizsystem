@@ -17,3 +17,13 @@ body {
 	background-color: #138496;
 	border-color: #117a8b;
 }
+
+#right_result {
+	position: relative;
+	left: 4rem;
+}
+
+#left_result {
+	position: relative;
+	right: 4rem;
+}
