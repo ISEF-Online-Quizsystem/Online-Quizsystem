@@ -153,19 +153,24 @@ def reset_status():
 @app.route('/singleplayer', methods=['GET', 'POST'])
 @login_required
 def singleplayer():
-    global right, wrong
+    global right, wrong, total
     question_number = 1
     form = QuestionSolve()
     module = Module.query.filter_by(status=1).first_or_404()
     try:
         q = Question.query.filter_by(module=module.name, status=0, released=1).all()
-        right = (Question.query.filter_by(module=module.name, status=1).all())
-        wrong = (Question.query.filter_by(module=module.name, status=2).all())
-        question_number = question_number + len(right) + len(wrong)
+        right = len(Question.query.filter_by(module=module.name, status=1).all())
+        wrong = len(Question.query.filter_by(module=module.name, status=2).all())
+        question_number = question_number + right + wrong
         #random.shuffle(q)
         if len(q) == 0 or question_number > 10:
+            total = Question.query.filter_by(module=module.name, status=1).all() + Question.query.filter_by(
+                module=module.name, status=2).all()
+            # i need the items of total outside the scope of the session, so i have to expunge them
+            for item in total:
+                db.session.expunge(item)
             reset_status()
-            return redirect(url_for('result'))
+            return redirect(url_for('result', total))
         form.radio.label.text = q[0].question
         form.radio.choices = [('1', q[0].option_one), ('2', q[0].option_two),
                               ('3', q[0].option_three),
@@ -173,13 +178,13 @@ def singleplayer():
         if form.validate_on_submit():
             if form.radio.data:
                 if q[0].right_choice == int(form.radio.data):
-                    flash('Richtig')
+                    #flash('Richtig')
                     q[0].status = 1
                     current_user.score = current_user.score + 1
                     current_user.number_of_questions = current_user.number_of_questions + 1
                     db.session.commit()
                 else:
-                    flash('Falsch')
+                    #flash('Falsch')
                     q[0].status = 2
                     current_user.number_of_questions = current_user.number_of_questions + 1
                     db.session.commit()
@@ -233,7 +238,7 @@ def highscore():
 @app.route('/result')
 @login_required
 def result():
-    return render_template('result.html', right=len(right), wrong=len(wrong), score=current_user.score)
+    return render_template('result.html', right=right, wrong=wrong, score=current_user.score, total=total)
 
 
 @app.route('/release', methods=['GET', 'POST'])

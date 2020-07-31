@@ -10,6 +10,20 @@
         <h2>Falsche Antworten: {{ wrong }}</h2>
         <h2>Gesamtpunktzahl: {{ score }}</h2>
         <p><span id="left_result"><a href="{{ url_for('singleplayer') }}">Noch mal!</a></span><span id="right_result"><a href="{{ url_for('play') }}">Zur Spielseite</a></span></p>
+        <br>
+        <div id="allquest" class="container">
+        <h3>Folgende Fragen wurden dir gestellt.</h3>
+        {% for item in total %}
+            <p>{{ total.index(item) + 1 }}. Frage</p>
+            <p>Module: {{ item.module }}</p>
+            <p>Frage:  {{ item.question }}</p>
+            <p>1. {{ item.option_one }}</p>
+            <p>2. {{ item.option_two }}</p>
+            <p>3. {{ item.option_three }}</p>
+            <p>4. {{ item.option_four }}</p>
+            <hr>
+        {% endfor %}
+        </div>
         {% endif %}
     </div>
 {% endblock %}

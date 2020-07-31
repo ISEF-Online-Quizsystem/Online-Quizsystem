@@ -103,4 +103,4 @@ class QuestionSolve(FlaskForm):
 
 class ModuleForm(FlaskForm):
     modules = SelectField('Wähle einen Kurs aus!', choices=get_modules())
-    submit = SubmitField('Auswählen')
+    submit = SubmitField('Auswahl bestätigen')
