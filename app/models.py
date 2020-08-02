@@ -53,7 +53,7 @@ class User(UserMixin, db.Model):
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    question = db.Column(db.String(280))
+    question = db.Column(db.String(512))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     module = db.Column(db.String(128))
     option_one = db.Column(db.String(256))
