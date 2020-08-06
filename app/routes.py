@@ -18,6 +18,7 @@ def before_request():
 
 @app.route('/index')
 @app.route('/')
+# Seite wird nur angezeigt, wenn man eingeloggt ist. Das schützt gegen anonyme Besucher.
 @login_required
 def index():
     tutor = False
@@ -28,6 +29,7 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    # überprüft, ob der Benutzer bereits eingeloggt ist.
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = LoginForm()

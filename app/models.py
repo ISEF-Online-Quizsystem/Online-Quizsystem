@@ -7,7 +7,7 @@ from time import time
 import jwt
 from app import app
 
-
+# Ladet den eingeloggten Benutzer aus der Datenbank
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
