@@ -24,6 +24,7 @@ class User(UserMixin, db.Model):
     score = db.Column(db.Integer, default=0)
     number_of_questions = db.Column(db.Integer, default=0)
 
+    # Diese Methode zeigt die Objekte dieser Klasse an. Das ist nützlich für das Debugging.
     def __repr__(self):
         return f'<User {self.username}>'
 
@@ -64,6 +65,7 @@ class Question(db.Model):
     status = db.Column(db.Integer, default=0)
     released = db.Column(db.Integer, default=0)
 
+    # Diese Methode zeigt die Objekte dieser Klasse an. Das ist nützlich für das Debugging.
     def __repr__(self):
         return f'<Question {self.question}>'
 
@@ -72,6 +74,10 @@ class Module(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), index=True, unique=True)
     status = db.Column(db.Boolean, default=0)
+
+    # Diese Methode zeigt die Objekte dieser Klasse an. Das ist nützlich für das Debugging.
+    def __repr__(self):
+        return f'<Module {self.name}>'
 
     def set_status_active(self):
         self.status = 1

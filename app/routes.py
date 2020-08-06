@@ -1,4 +1,4 @@
-from flask import render_template, url_for, flash, redirect, request, make_response
+from flask import render_template, url_for, flash, redirect, request
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, ResetPasswordRequestForm, ResetPasswordForm, \
     QuestionForm, QuestionSolve, get_modules, ModuleForm, ReleaseForm
@@ -7,7 +7,6 @@ from app.models import User, Question, Module
 from werkzeug.urls import url_parse
 from datetime import datetime
 from app.email import send_password_reset_email
-import random
 
 
 @app.before_request
@@ -162,11 +161,11 @@ def singleplayer():
         right = len(Question.query.filter_by(module=module.name, status=1).all())
         wrong = len(Question.query.filter_by(module=module.name, status=2).all())
         question_number = question_number + right + wrong
-        #random.shuffle(q)
         if len(q) == 0 or question_number > 10:
             total = Question.query.filter_by(module=module.name, status=1).all() + Question.query.filter_by(
                 module=module.name, status=2).all()
-            # i need the items of total outside the scope of the session, so i have to expunge them
+            # Die einzelnen Fragen werden in der result.html benötigt, deshalb werden sie via
+            # expunge aus der Session entfernt.
             for item in total:
                 db.session.expunge(item)
             reset_status()
