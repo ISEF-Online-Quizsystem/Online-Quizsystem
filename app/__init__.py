@@ -22,6 +22,7 @@ bootstrap = Bootstrap(app)
 moment = Moment(app)
 
 
+# Bei Fehlern werden die Admins per E-Mail benachrichtigt. Allgemeine Informationen werden lokal gepspeichert.
 if not app.debug:
     if app.config['MAIL_SERVER']:
         auth = None

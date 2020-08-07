@@ -9,6 +9,7 @@ from datetime import datetime
 from app.email import send_password_reset_email
 
 
+# Mittels dieses Dekorators ist es möglich Code auszuführen bevor eine View Funktion aufgerufen wird.
 @app.before_request
 def before_request():
     if current_user.is_authenticated:
@@ -70,6 +71,7 @@ def register():
 @app.route('/user/<username>')
 @login_required
 def user(username):
+    # Wenn kein Benutzer gefunden wird, dann wird ein 404 Fehler zurückgegeben.
     user = User.query.filter_by(username=username).first_or_404()
 
     return render_template('user.html', user=user)

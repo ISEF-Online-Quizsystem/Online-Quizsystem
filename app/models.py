@@ -34,10 +34,12 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+    # Generiert ein Avatar-Bild mit Hilfe der E-Mail-Adresse und eines MD5 Hash
     def avatar(self, size):
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()
         return f'https://www.gravatar.com/avatar/{digest}?d=identicon&s={size}'
 
+    # Generiert ein JSON Web Token
     def get_reset_password_token(self, expires_in=600):
         return jwt.encode({'reset_password': self.id, 'exp': time() + expires_in},
                           app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
