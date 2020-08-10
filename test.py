@@ -23,6 +23,15 @@ class UserModelCase(unittest.TestCase):
         self.assertEqual(u.avatar(80),
                          'https://www.gravatar.com/avatar/0b96ea15f14649137616ed50273a66cc?d=identicon&s=80')
 
+    def test_create_user(self):
+        u = User(username='alpha', email='alpha@beta.de', about_me='nicht wichtig', tutor=1, score=42, number_of_questions=123)
+        self.assertEqual(u.username, 'alpha')
+        self.assertEqual(u.email, 'alpha@beta.de')
+        self.assertEqual(u.about_me, 'nicht wichtig')
+        self.assertEqual(u.tutor, 1)
+        self.assertEqual(u.score, 42)
+        self.assertEqual(u.number_of_questions, 123)
+
 
 class ModuleModelCase(unittest.TestCase):
     def setUp(self):
@@ -43,9 +52,16 @@ class ModuleModelCase(unittest.TestCase):
         self.assertEqual(m.status, 1)
 
     def test_status_inactive(self):
-        m = Module(name="Inaktives Modul")
+        m = Module(name='Inaktives Modul')
         m.set_status_inactive()
         self.assertEqual(m.status, 0)
+
+    def test_create_module(self):
+        m = Module(name='Testmodul', status=0)
+        self.assertEqual(m.name, 'Testmodul')
+        self.assertEqual(m.status, 0)
+
+
 
 
 class QuestionModelCase(unittest.TestCase):
