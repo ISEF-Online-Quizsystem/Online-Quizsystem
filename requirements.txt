@@ -1,6 +1,6 @@
 alembic==1.4.2
 blinker==1.4
-Bootstrap-Flask==1.4
+Bootstrap-Flask==1.5.1
 click==7.1.2
 dnspython==2.0.0
 dominate==2.5.2
