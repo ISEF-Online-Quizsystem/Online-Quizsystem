@@ -1,4 +1,4 @@
-alembic==1.4.2
+alembic==1.5.4
 blinker==1.4
 Bootstrap-Flask==1.4
 click==7.1.2
